@@ -15,11 +15,10 @@ class Feed extends React.Component {
 			const response = await fetch(
 				 "https://backend.andreworals5548.workers.dev/posts",
 				{method: "GET", 
-				 headers: {"Content-Type": "application/json"}}
+				 headers: {"Content-Type": "application/json",
+				           "mode": "no-cors"}}
 		  );
 		  const content = await response.json();
-		  console.log("DONE");
-		  console.log(content);
 			this.setState({ posts: content });
 	}
 
