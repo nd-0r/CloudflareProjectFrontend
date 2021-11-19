@@ -1,0 +1,14 @@
+.form-box {
+	position: absolute;
+	display: block;
+  width: 300px;
+	height: 500px;
+	top: 50%;
+	left: 50%;
+	margin-left: -150px;
+	margin-top: -250px;
+}
+
+#content-input {
+  resize: none;
+}
