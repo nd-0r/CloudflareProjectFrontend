@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from "@reach/router";
 import { Navbar, Alignment, Button } from "@blueprintjs/core";
 
-import PostCreator from "../components/create-post.js";
+import PostCreator from "./create-post.js";
 
 class Layout extends React.Component {
 	constructor({props}) {

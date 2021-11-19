@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "@reach/router";
 import { Card, Elevation } from "@blueprintjs/core";
 
-import Layout from "../components/layout.js";
+import Layout from "./layout.js";
 import { feed, card } from "../css/feed.module.css";
 
 class Feed extends React.Component {
@@ -15,8 +15,7 @@ class Feed extends React.Component {
 			const response = await fetch(
 				 "https://backend.andreworals5548.workers.dev/posts",
 				{method: "GET", 
-				 headers: {"Content-Type": "application/json",
-				           "mode": "no-cors"}}
+				 headers: {"Content-Type": "application/json"}}
 		  );
 		  const content = await response.json();
 			this.setState({ posts: content });
