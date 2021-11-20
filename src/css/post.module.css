@@ -1,0 +1,35 @@
+.card {
+  margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.cardContent {
+	width: 100%;
+	min-height: 170px;
+	position: relative;
+}
+
+.contentBox {
+	display: block;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+.buttonBox {
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+}
+
+.votesContainer {
+	text-align: center;
+}
+
+.postTitle {
+}
+
+.postFooter {
+  position: absolute;
+	bottom: 0;
+}

@@ -1,10 +1,10 @@
 import React from "react";
-import { Link } from "@reach/router";
-import { Card, Elevation, Button } from "@blueprintjs/core";
+import { Button, Spinner } from "@blueprintjs/core";
 
 import Layout from "./layout.js";
 import PostCreator from "./create-post.js";
-import { feed, card, postButtonBox } from "../css/feed.module.css";
+import Post from "./post.js";
+import { feed, postButtonBox, spinnerBox } from "../css/feed.module.css";
 
 class Feed extends React.Component {
 	constructor(props) {
@@ -38,15 +38,16 @@ class Feed extends React.Component {
 			    <div className={postButtonBox}>
 	  	      <Button large={true} class="bp3-modern" icon="document" text="Post!" onClick={this.toggleOverlay}/> 
 			    </div>
-			  {this.state.posts.map((post) => (
-			  	<div className={card}>
-			  	  <Card class="bp3-card bp3-interactive" interactive={true} elevation={Elevation.TWO}>
-			  	    <h3>{post.title}</h3>
-			  	    <p>{post.content}</p>
-			  	    <p>Posted by {post.name} on {post.date}</p>
-			  	  </Card>
-			  	</div>
-			  ))}
+			  {this.state.posts.length > 0 ? this.state.posts.map((post) => (
+          <Post 
+					  name={post.name} 
+					  title={post.title} 
+					  content={post.content} 
+					  date={post.date} 
+					  votes={post.votes}/>))
+					:
+					<Spinner className={spinnerBox}/>
+				}
 			  </div>
 			  <PostCreator addPost={this.addPost} open={this.state.overlay} toggleOverlay={this.toggleOverlay}/>
 			</Layout>
