@@ -49,10 +49,23 @@ class PostCreator extends React.Component {
 	};
 
 	submitContent = async () => {
+		if (!this.state.name || !this.state.title || !this.state.content) {
+			this.setState({ error: true, errorText: "Error: fill required fields" });
+			return;
+		}
+
 		this.setState({ loading: true });
 		// from https://stackoverflow.com/questions/46946380/fetch-api-request-timeout
 		const controller = new AbortController();
 		const timeoutId = setTimeout(() => controller.abort(), 5000);
+
+		const post = {
+		  id: (new Date()).getTime(),
+		  name: this.state.name,
+		  title: this.state.title,
+		  content: this.state.content,
+			date: (new Date()).toDateString(),
+	  };
 
 		let response;
 		try {
@@ -60,12 +73,9 @@ class PostCreator extends React.Component {
 	      "https://backend.andreworals5548.workers.dev/posts",
 		    {signal: controller.signal,
 		  	 method: "POST", 
-		     headers: {"Content-Type": "application/json"},
-		  	 body: JSON.stringify({
-		  	   name: this.state.name,
-		  	   title: this.state.title,
-		  	   content: this.state.content,
-		  	 })}
+				 // mode: "no-cors",
+		     headers: {"Content-Type": "text/plain"},
+		  	 body: JSON.stringify(post)}
 		  );
 		} catch (err) {
 			this.setState({ error: true, loading: false, errorText: "Error" });
@@ -76,6 +86,7 @@ class PostCreator extends React.Component {
 		  console.log(response.statusText);
 		  this.setState({ error: true, errorText: `Error: ${response.statusText}` });
 		} else {
+			this.props.addPost(post);
 		  this.reset();
 		}
 
