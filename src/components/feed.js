@@ -19,7 +19,12 @@ class Feed extends React.Component {
 			   // mode: "no-cors",
 				 headers: {"Content-Type": "text/plain"}}
 		  );
-		  const content = await response.json();
+		  let content = await response.json();
+		  content.sort((a, b) => { 
+				const a_votes = a.votes ? a.votes : 0;
+				const b_votes = b.votes ? b.votes : 0;
+				return a_votes < b_votes;
+			});
 			this.setState({ posts: content });
 	}
 
@@ -40,11 +45,12 @@ class Feed extends React.Component {
 			    </div>
 			  {this.state.posts.length > 0 ? this.state.posts.map((post) => (
           <Post 
+					  id={post.id}
 					  name={post.name} 
 					  title={post.title} 
 					  content={post.content} 
 					  date={post.date} 
-					  votes={post.votes}/>))
+					  votes={post.votes ? Number(post.votes) : 0}/>))
 					:
 					<Spinner className={spinnerBox}/>
 				}
