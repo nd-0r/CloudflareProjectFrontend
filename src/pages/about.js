@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Card, Dialog } from "@blueprintjs/core";
+import { Card } from "@blueprintjs/core";
 
 import Layout from "../components/layout.js";
 

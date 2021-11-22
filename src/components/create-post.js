@@ -1,6 +1,5 @@
 import React from "react";
 import { 
-	Alignment, 
 	Alert, 
 	FormGroup, 
 	InputGroup, 
@@ -27,7 +26,7 @@ const defaultState = {
 		};
 
 // From https://stackoverflow.com/questions/8834813/regex-to-match-image-url
-const url_regex = /^https?:\/\/(?:[a-z\-]+\.)+[a-z]{2,6}(?:\/[^\/#?]+)+\.(?:jpe?g|gif|png)$/g;
+const url_regex = /^https?:\/\/(?:[a-z-]+\.)+[a-z]{2,6}(?:\/[^/#?]+)+\.(?:jpe?g|gif|png)$/g;
 
 class PostCreator extends React.Component {
 	constructor(props) {
@@ -175,7 +174,7 @@ class PostCreator extends React.Component {
 			        id="content-input" 
 			        growVertically={true}
 			        fill={true}
-			        placeholder="Your content here!" 
+			        placeholder={this.state.textMode ? "Your content here!" : "Paste image URL here!"}
 			        intent={this.state.error ? Intent.DANGER : null}
 			        value={this.state.content}
 			        className={Classes.FILL}

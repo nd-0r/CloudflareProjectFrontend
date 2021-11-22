@@ -59,6 +59,7 @@ class Post extends React.Component {
 			return false;
 		}
 
+		clearTimeout(timeoutId);
 		return true;
 	};
 
