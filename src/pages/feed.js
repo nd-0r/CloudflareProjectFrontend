@@ -1,9 +1,9 @@
 import React from "react";
 import { Button, Spinner } from "@blueprintjs/core";
 
-import Layout from "./layout.js";
-import PostCreator from "./create-post.js";
-import Post from "./post.js";
+import Layout from "../components/layout.js";
+import PostCreator from "../components/create-post.js";
+import Post from "../components/post.js";
 import { feed, postButtonBox, spinnerBox } from "../css/feed.module.css";
 
 class Feed extends React.Component {

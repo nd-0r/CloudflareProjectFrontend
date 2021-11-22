@@ -51,5 +51,6 @@
 
 .postFooter {
   position: absolute;
+	padding-bottom: 5px;
 	bottom: 0px;
 }
