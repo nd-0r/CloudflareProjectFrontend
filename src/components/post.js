@@ -17,7 +17,12 @@ import {
 	votesContainer,
 	postTitle,
 	postFooter,
-	cardOpenContent
+	cardOpenContent,
+	contentBoxOpen,
+	buttonBoxOpen,
+	postImageOpen,
+	postTitleOpen,
+	postFooterOpen
 } from "../css/post.module.css";
 
 class Post extends React.Component {
@@ -121,20 +126,21 @@ class Post extends React.Component {
 			    onClose={() => this.setState({ open: false })}
 			    canEscapeKeyClose={true}
 			    canOutsideClickClose={true}
+			    style={{minWidth: "70%"}}
 			  >
 			    <div className={cardOpenContent}>
-		    	  <h3 className={postTitle}>{this.props.title}</h3>
-			      <div className={contentBox}>
+		    	  <h3 className={postTitleOpen}>{this.props.title}</h3>
+			      <div className={contentBoxOpen}>
 			        {this.props.type ? 
 		    	      <p>{this.props.content}</p>
 			  				:
-			  				<img className={postImage} src={this.props.content} alt={this.props.content}/>
+			  				<img className={postImageOpen} src={this.props.content} alt={this.props.content}/>
 			  			}
 			      </div>
-			      <div className={postFooter}>
+			      <div className={postFooterOpen}>
 		    	    <p>Posted by {this.props.name} on {this.props.date}</p>
 			      </div>
-			      <div className={buttonBox}>
+			      <div className={buttonBoxOpen}>
 			        <Button disabled={this.state.voted} large={true} icon="arrow-up" text="" onClick={this.incrementVotes}/>
 			        <div className={votesContainer}>
 			          <h1>{this.state.votes}</h1>

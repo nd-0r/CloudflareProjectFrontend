@@ -37,10 +37,28 @@
 	padding-bottom: 25px;
 }
 
+.contentBoxOpen {
+	display: block;
+	word-break: break-all;
+	width: 85%;
+	font-size: 22pt;
+	margin-top: 20px;
+	padding-bottom: 25px;
+}
+
 .buttonBox {
 	display: block;
 	position: absolute;
 	padding-top: 20px;
+	padding-right: 5%;
+	top: 0;
+	right: 0;
+}
+
+.buttonBoxOpen {
+	display: block;
+	position: absolute;
+	padding-top: 0px;
 	padding-right: 5%;
 	top: 0;
 	right: 0;
@@ -51,11 +69,23 @@
 }
 
 .postTitle {
+	word-break: break-all;
 	margin-top: -5px;
 	font-size: 18pt;
 }
 
+.postTitleOpen {
+	word-break: break-all;
+	margin-top: -5px;
+	width: 85%;
+	font-size: 26pt;
+}
+
 .postImage {
+	width: 100%;
+}
+
+.postImageOpen {
 	width: 100%;
 }
 
@@ -63,4 +93,10 @@
   position: absolute;
 	padding-bottom: 5px;
 	bottom: 0px;
+}
+
+.postFooterOpen {
+	position: absolute;
+	padding-bottom: 0px;
+	bottom: -15px;
 }
