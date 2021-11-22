@@ -31,7 +31,8 @@
 
 .contentBox {
 	display: block;
-	word-break: break-all;
+	/* word-break: break-all; */
+	overflow-wrap: break-word;
 	font-size: 16pt;
 	margin-top: 20px;
 	padding-bottom: 25px;
@@ -39,7 +40,7 @@
 
 .contentBoxOpen {
 	display: block;
-	word-break: break-all;
+	overflow-wrap: break-word;
 	width: 85%;
 	font-size: 22pt;
 	margin-top: 20px;
