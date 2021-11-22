@@ -46,6 +46,7 @@ class Feed extends React.Component {
 			  {this.state.posts.length > 0 ? this.state.posts.map((post) => (
           <Post 
 					  id={post.id}
+					  type={post.type}
 					  name={post.name} 
 					  title={post.title} 
 					  content={post.content} 

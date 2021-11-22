@@ -1,5 +1,14 @@
 import React from "react";
-import { Alert, FormGroup, InputGroup, Classes, TextArea, Intent } from "@blueprintjs/core";
+import { 
+	Alignment, 
+	Alert, 
+	FormGroup, 
+	InputGroup, 
+	Classes, 
+	TextArea, 
+	Intent, 
+	Switch 
+} from "@blueprintjs/core";
 
 import "../css/post-creator.css";
 
@@ -13,8 +22,12 @@ const defaultState = {
 			content: "",
 			error: false,
 			errorText: "",
- 		  loading: false
+ 		  loading: false,
+	    textMode: true
 		};
+
+// From https://stackoverflow.com/questions/8834813/regex-to-match-image-url
+const url_regex = /^https?:\/\/(?:[a-z\-]+\.)+[a-z]{2,6}(?:\/[^\/#?]+)+\.(?:jpe?g|gif|png)$/g;
 
 class PostCreator extends React.Component {
 	constructor(props) {
@@ -25,6 +38,10 @@ class PostCreator extends React.Component {
 	reset = () => {
     this.setState(defaultState);
 		this.props.toggleOverlay();
+	}
+
+	changeMode = () => {
+		this.setState({ textMode: !this.state.textMode });
 	}
 
   handleNameChange = response => {
@@ -44,13 +61,19 @@ class PostCreator extends React.Component {
 	handleContentChange = response => {
 		let text = response.target.value;
 		this.setState({ 
-			content: text.length <= kContentCharLimit ? text : this.state.content
+			content: text.length <= kContentCharLimit ? text : this.state.content,
 		});
 	};
 
 	submitContent = async () => {
 		if (!this.state.name || !this.state.title || !this.state.content) {
 			this.setState({ error: true, errorText: "Error: fill required fields" });
+			return;
+		}
+
+		if (!this.state.textMode && !url_regex.test(this.state.content)) {
+			this.setState({ error: true, errorText: "Invalid image URL" });
+			console.log("HERE");
 			return;
 		}
 
@@ -61,6 +84,7 @@ class PostCreator extends React.Component {
 
 		const post = {
 		  id: (new Date()).getTime(),
+			type: this.state.textMode,
 		  name: this.state.name,
 		  title: this.state.title,
 		  content: this.state.content,
@@ -104,6 +128,14 @@ class PostCreator extends React.Component {
 			       onConfirm={this.submitContent}
 		  > 
 			  <div>
+			    <Switch 
+			      inline={true}
+			      style={{position: "relative", left: "50%", marginBottom: "20px", marginLeft: "-10px"}}
+			      large={true}
+			      checked={this.state.textMode} 
+			      label={this.state.textMode ? "Text" : "Image"} 
+			      onChange={this.changeMode}
+			    />
   		    <FormGroup
   		      label="Name"
   		      inline={true}

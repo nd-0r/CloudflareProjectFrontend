@@ -3,9 +3,11 @@ import React from "react";
 import { Card, Elevation, Button } from "@blueprintjs/core";
 
 import { 
-	card, 
+	cardText, 
+	cardImage,
 	cardContent, 
 	contentBox, 
+	postImage,
 	buttonBox,
 	votesContainer,
 	postTitle,
@@ -71,12 +73,16 @@ class Post extends React.Component {
 
 	render() {
 		return (
-		  <div className={card}>
+		  <div className={this.props.type ? cardText : cardImage}>
 	      <Card class="bp3-card bp3-interactive" interactive={true} elevation={Elevation.TWO}>
 			    <div className={cardContent}>
 		  	    <h3 className={postTitle}>{this.props.title}</h3>
 			      <div className={contentBox}>
-		  	      <p>{this.props.content}</p>
+			        {this.props.type ? 
+		  	        <p>{this.props.content}</p>
+								:
+								<img className={postImage} src={this.props.content} alt={this.props.content}/>
+							}
 			      </div>
 			      <div className={postFooter}>
 		  	      <p>Posted by {this.props.name} on {this.props.date}</p>
