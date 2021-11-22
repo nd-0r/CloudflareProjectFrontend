@@ -1,6 +1,11 @@
 import React from "react";
 
-import { Card, Elevation, Button } from "@blueprintjs/core";
+import { 
+	Card, 
+	Elevation, 
+	Button, 
+	Dialog 
+} from "@blueprintjs/core";
 
 import { 
 	cardText, 
@@ -11,13 +16,18 @@ import {
 	buttonBox,
 	votesContainer,
 	postTitle,
-	postFooter
+	postFooter,
+	cardOpenContent
 } from "../css/post.module.css";
 
 class Post extends React.Component {
   constructor(props) {
 		super(props);
-		this.state = { votes: props.votes, voted: false };
+		this.state = { 
+			votes: props.votes, 
+			voted: false,
+		  open: false
+		};
 	}
 
 	submitVotes = async (new_votes) => {
@@ -71,10 +81,20 @@ class Post extends React.Component {
 		}
 	}
 
+	toggleOpen = () => {
+		console.log("CALLED!!!!");
+		this.setState({ open: !this.state.open });
+	}
+
 	render() {
 		return (
 		  <div className={this.props.type ? cardText : cardImage}>
-	      <Card class="bp3-card bp3-interactive" interactive={true} elevation={Elevation.TWO}>
+	      <Card 
+			    class="bp3-card bp3-interactive" 
+			    interactive={true} 
+			    elevation={Elevation.TWO}
+			    onClick={this.toggleOpen}
+			  >
 			    <div className={cardContent}>
 		  	    <h3 className={postTitle}>{this.props.title}</h3>
 			      <div className={contentBox}>
@@ -96,7 +116,35 @@ class Post extends React.Component {
 			      </div>
 			    </div>
 		    </Card>
+			  <Dialog 
+			    isOpen={this.state.open} 
+			    onClose={() => this.setState({ open: false })}
+			    canEscapeKeyClose={true}
+			    canOutsideClickClose={true}
+			  >
+			    <div className={cardOpenContent}>
+		    	  <h3 className={postTitle}>{this.props.title}</h3>
+			      <div className={contentBox}>
+			        {this.props.type ? 
+		    	      <p>{this.props.content}</p>
+			  				:
+			  				<img className={postImage} src={this.props.content} alt={this.props.content}/>
+			  			}
+			      </div>
+			      <div className={postFooter}>
+		    	    <p>Posted by {this.props.name} on {this.props.date}</p>
+			      </div>
+			      <div className={buttonBox}>
+			        <Button disabled={this.state.voted} large={true} icon="arrow-up" text="" onClick={this.incrementVotes}/>
+			        <div className={votesContainer}>
+			          <h1>{this.state.votes}</h1>
+			        </div>
+			        <Button disabled={this.state.voted} large={true} icon="arrow-down" text="" onClick={this.decrementVotes}/>
+			      </div>
+			    </div>
+			  </Dialog>
 	    </div>
+
 		);
 	}
 }
